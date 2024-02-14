@@ -12,8 +12,15 @@ class RootViewModel extends GetxController {
     selectedIndex(index);
   }
 
+  final List<String> pageTitle = [
+    "Search",
+    "Categories",
+    "Favorites",
+    "New Recipe",
+  ];
+
   final List<StatelessWidget> pages = [
-    HomeView(),
+    const HomeView(),
     const CategoryView(),
     const FavoriteView(),
     const AddView(),

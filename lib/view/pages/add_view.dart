@@ -10,6 +10,9 @@ class AddView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addViewModel = Get.find<AddViewModel>();
+    void buttonPressed() {
+      addViewModel.onSubmit();
+    }
 
     return SingleChildScrollView(
       child: Padding(
@@ -18,17 +21,28 @@ class AddView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InputField(title: "Name", doChange: addViewModel.setName),
-            InputField(title: "Calories", doChange: addViewModel.setCalories),
             InputField(
-                title: "Time to cook", doChange: addViewModel.setMakingTime),
+              title: "Name",
+              doChange: addViewModel.setName,
+              controller: addViewModel.nameController,
+            ),
+            InputField(
+              title: "Calories",
+              doChange: addViewModel.setCalories,
+              controller: addViewModel.caloriesController,
+            ),
+            InputField(
+              title: "Time to cook",
+              doChange: addViewModel.setMakingTime,
+              controller: addViewModel.makingTimeController,
+            ),
             Dropdown(viewModel: addViewModel),
             Center(
               child: SizedBox(
                 height: 50,
                 width: 120,
                 child: ElevatedButton(
-                  onPressed: addViewModel.onSubmit,
+                  onPressed: buttonPressed,
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.green),
                     foregroundColor: MaterialStatePropertyAll(Colors.white),

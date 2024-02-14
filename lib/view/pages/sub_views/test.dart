@@ -4,37 +4,41 @@ import 'package:get/get.dart';
 class Test extends StatelessWidget {
   Test({super.key});
 
-  var dropdownValue = "one".obs;
+  var selectedIndex = 0.obs;
+  var isSelected = [true, false].obs;
+  var display = [
+    const Text("Grid view"),
+    const Text("List view"),
+  ].obs;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Obx(
-        () => DropdownButton<String>(
-          value: dropdownValue.value,
-          icon: const Icon(Icons.menu),
-          underline: Container(
-            height: 2,
-            color: Colors.purple,
+      child: Column(
+        children: [
+          Obx(
+            () => ToggleButtons(
+              isSelected: isSelected,
+              onPressed: (index) {
+                selectedIndex.value = index;
+                for (var i = 0; i < isSelected.length; i++) {
+                  if (index == i) {
+                    isSelected[i] = true;
+                  } else {
+                    isSelected[i] = false;
+                  }
+                }
+              },
+              children: const [
+                Icon(Icons.grid_view),
+                Icon(Icons.list),
+              ],
+            ),
           ),
-          onChanged: (value) {
-            dropdownValue(value);
-          },
-          items: const [
-            DropdownMenuItem<String>(
-              value: "one",
-              child: Text("One"),
-            ),
-            DropdownMenuItem<String>(
-              value: "two",
-              child: Text("Two"),
-            ),
-            DropdownMenuItem<String>(
-              value: "three",
-              child: Text("Three"),
-            ),
-          ],
-        ),
+          Obx(
+            () => display[selectedIndex.value],
+          ),
+        ],
       ),
     );
   }

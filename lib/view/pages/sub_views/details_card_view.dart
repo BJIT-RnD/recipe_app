@@ -9,13 +9,6 @@ class DetailsCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final data = Recipe(
-    //   name: "Bucatini with mushrooms & sausage",
-    //   calories: 794,
-    //   makingTime: 22,
-    //   category: FoodCategory.pastas,
-    // );
-
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Card(
@@ -29,6 +22,7 @@ class DetailsCardView extends StatelessWidget {
               padding: const EdgeInsets.all(4.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -39,25 +33,45 @@ class DetailsCardView extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(8)),
                           child: Image.asset(
-                            "assets/pizza.jpg",
+                            "assets/chorizo.png",
                             height: 100,
                             width: 160,
                             fit: BoxFit.cover,
                           ),
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.fromLTRB(0, 4, 2, 0),
+                        //   child: IconButton(
+                        //     onPressed: () {
+                        //       debugPrint("fav button clicked!");
+                        //     },
+                        //     style: const ButtonStyle(
+                        //       backgroundColor:
+                        //           MaterialStatePropertyAll(Colors.white),
+                        //     ),
+                        //     icon: const Icon(Icons.favorite_border),
+                        //   ),
+                        // ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 4, 2, 0),
-                          child: IconButton(
-                            onPressed: () {
-                              debugPrint("fav button clicked!");
-                            },
-                            style: const ButtonStyle(
-                              backgroundColor:
-                                  MaterialStatePropertyAll(Colors.white),
+                          padding: const EdgeInsets.fromLTRB(0, 8, 8, 0),
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.white,
                             ),
-                            icon: const Icon(Icons.favorite_border),
+                            child: Center(
+                              child: IconButton(
+                                color: Colors.black54,
+                                alignment: Alignment.center,
+                                iconSize: 20,
+                                onPressed: () {},
+                                icon: const Icon(Icons.favorite_border),
+                              ),
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -68,7 +82,7 @@ class DetailsCardView extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 10),
+                          fontWeight: FontWeight.w700, fontSize: 11),
                     ),
                   ),
                   Padding(
@@ -80,23 +94,28 @@ class DetailsCardView extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.local_fire_department_outlined,
-                              size: 20,
+                              size: 18,
                             ),
                             Text(
-                              " ${data.calories} Kcal",
+                              "${data.calories} Kcal",
                               style: const TextStyle(fontSize: 10),
                             ),
                           ],
                         ),
-                        const Icon(
-                          Icons.fiber_manual_record_outlined,
-                          size: 10,
+                        Container(
+                          height: 5,
+                          width: 5,
+                          // margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2.5),
+                            color: Colors.black54,
+                          ),
                         ),
                         Row(
                           children: [
                             const Icon(
                               Icons.query_builder,
-                              size: 20,
+                              size: 18,
                             ),
                             Text(
                               " ${data.makingTime} min",

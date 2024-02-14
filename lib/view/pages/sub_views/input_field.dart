@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final String title;
   final ValueSetter doChange;
+  final TextEditingController controller;
 
   const InputField({
     super.key,
     required this.title,
     required this.doChange,
+    required this.controller,
   });
 
   @override
@@ -29,6 +31,7 @@ class InputField extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
           child: TextField(
+            controller: controller,
             cursorColor: Colors.black45,
             decoration: const InputDecoration(
               floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 enum FoodCategory { breakfast, lunch, drinks, pastas, salads, desserts, soups }
 
 class Recipe {
@@ -48,5 +50,5 @@ class RecipeData {
       makingTime: 20,
       category: FoodCategory.desserts,
     ),
-  ];
+  ].obs;
 }
