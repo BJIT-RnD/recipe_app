@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:recipes/model/dummy_data.dart';
 import 'package:recipes/view/pages/home_view.dart';

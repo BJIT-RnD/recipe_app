@@ -92,6 +92,7 @@ class TypeTwoView extends StatelessWidget {
       itemBuilder: (context, index) {
         return ListCardView(data: RecipeData.data[index]);
       },
+      itemExtent: 100,
       itemCount: RecipeData.data.length,
       padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
     );

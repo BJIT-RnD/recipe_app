@@ -25,26 +25,29 @@ class ListCardView extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            color: Colors.teal,
+          SizedBox(
+            // color: Colors.teal,
             height: 75,
-            // width: double.maxFinite - 120,
+            // width: double.maxFinite,
             width: MediaQuery.of(context).size.width - 160,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text(
-                        data.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                    Expanded(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          data.name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),
