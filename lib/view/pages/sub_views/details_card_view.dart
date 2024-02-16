@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:recipes/model/dummy_data.dart';
+import 'package:recipes/view_model/favorite_view_model.dart';
 // import 'package:recipes/model/dummy_data.dart';
 
 class DetailsCardView extends StatelessWidget {
@@ -9,6 +11,7 @@ class DetailsCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteViewModel = Get.find<FavoriteViewModel>();
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Card(
@@ -39,19 +42,6 @@ class DetailsCardView extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.fromLTRB(0, 4, 2, 0),
-                        //   child: IconButton(
-                        //     onPressed: () {
-                        //       debugPrint("fav button clicked!");
-                        //     },
-                        //     style: const ButtonStyle(
-                        //       backgroundColor:
-                        //           MaterialStatePropertyAll(Colors.white),
-                        //     ),
-                        //     icon: const Icon(Icons.favorite_border),
-                        //   ),
-                        // ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 8, 8, 0),
                           child: Container(
@@ -61,13 +51,27 @@ class DetailsCardView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                               color: Colors.white,
                             ),
-                            child: Center(
-                              child: IconButton(
-                                color: Colors.black54,
-                                alignment: Alignment.center,
-                                iconSize: 20,
-                                onPressed: () {},
-                                icon: const Icon(Icons.favorite_border),
+                            child: Obx(
+                              () => Center(
+                                child: IconButton(
+                                  color:
+                                      favoriteViewModel.favList.contains(data)
+                                          ? Colors.red
+                                          : Colors.black54,
+                                  alignment: Alignment.center,
+                                  iconSize: 20,
+                                  onPressed: () {
+                                    if (favoriteViewModel.favList
+                                        .contains(data)) {
+                                      favoriteViewModel.favList.remove(data);
+                                    } else {
+                                      favoriteViewModel.favList.add(data);
+                                    }
+                                  },
+                                  icon: favoriteViewModel.favList.contains(data)
+                                      ? const Icon(Icons.favorite)
+                                      : const Icon(Icons.favorite_border),
+                                ),
                               ),
                             ),
                           ),
