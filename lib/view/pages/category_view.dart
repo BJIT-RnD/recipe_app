@@ -14,26 +14,27 @@ class CategoryView extends StatelessWidget {
           child: Card(
             elevation: 8,
             child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      (FoodCategory.values[index].toString().split(".").last)
-                          .capitalizeFirst!,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    (FoodCategory.values[index].toString().split(".").last)
+                        .capitalizeFirst!,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
-                    Image.asset(
-                      "assets/${FoodCategory.values[index].toString().split(".").last}.png",
-                      height: 45,
-                      width: 45,
-                      fit: BoxFit.fill,
-                    ),
-                  ],
-                )),
+                  ),
+                  Image.asset(
+                    "assets/${FoodCategory.values[index].toString().split(".").last}.png",
+                    height: 45,
+                    width: 45,
+                    fit: BoxFit.fill,
+                  ),
+                ],
+              ),
+            ),
           ),
         );
       },

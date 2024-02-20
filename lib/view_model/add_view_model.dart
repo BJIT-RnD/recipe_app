@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:recipes/model/dummy_data.dart';
+import 'package:recipes/view_model/home_view_model.dart';
 
 class AddViewModel extends GetxController {
   var nameController = TextEditingController();
@@ -38,6 +39,9 @@ class AddViewModel extends GetxController {
                 makingTime: mTime,
                 category: category.value),
           );
+          // RecipeData.filteredData.value = RecipeData.data;
+          // var hvm = Get.find<HomeViewModel>();
+          // hvm.searchController.clear;
           error({
             "title": "Success",
             "message": "Your data added successfully",

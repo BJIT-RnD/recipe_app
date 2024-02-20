@@ -10,7 +10,6 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   void _doFilter(String value) {
-    // debugPrint("typed value is : $value");
     if (value.isEmpty) {
       RecipeData.filteredData.value = RecipeData.data;
     } else {
@@ -24,8 +23,6 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = Get.find<HomeViewModel>();
-    // return const TypeOneView();
-    // return const TypeTwoView();
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +49,7 @@ class HomeView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 22, 0, 0),
                 child: TextField(
+                  controller: homeViewModel.searchController,
                   cursorColor: Colors.black45,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.search),
