@@ -9,6 +9,18 @@ import 'package:recipes/view_model/home_view_model.dart';
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
+  void _doFilter(String value) {
+    // debugPrint("typed value is : $value");
+    if (value.isEmpty) {
+      RecipeData.filteredData.value = RecipeData.data;
+    } else {
+      RecipeData.filteredData.value = RecipeData.data
+          .where((recipe) =>
+              recipe.name.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final homeViewModel = Get.find<HomeViewModel>();
@@ -16,17 +28,75 @@ class HomeView extends StatelessWidget {
     // return const TypeTwoView();
     return Column(
       mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "What is in your kitchen?",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Text(
+                "Enter your recipe name",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 22, 0, 0),
+                child: TextField(
+                  cursorColor: Colors.black45,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    floatingLabelAlignment: FloatingLabelAlignment.center,
+                    labelStyle: TextStyle(
+                      fontSize: 16,
+                    ),
+                    contentPadding: EdgeInsets.all(14),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.cyan,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.cyan,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    hintText: "Type your recipe",
+                    hintStyle: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  onChanged: (value) => _doFilter(value),
+                ),
+              ),
+            ],
+          ),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 4, 22, 8),
+              padding: const EdgeInsets.fromLTRB(0, 0, 22, 0),
               child: Obx(
                 () => ToggleButtons(
                   constraints:
-                      const BoxConstraints(minWidth: 40, minHeight: 30),
+                      const BoxConstraints(minWidth: 30, minHeight: 30),
                   isSelected: homeViewModel.isSelected,
                   selectedColor: Colors.white,
                   fillColor: Colors.cyan[200],
@@ -65,19 +135,22 @@ class TypeOneView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          // mainAxisSpacing: 0,
-          // crossAxisSpacing: 0,
-          mainAxisExtent: 200,
+    final homeViewModel = Get.find<HomeViewModel>();
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            // mainAxisSpacing: 0,
+            // crossAxisSpacing: 0,
+            mainAxisExtent: 200,
+          ),
+          itemBuilder: (context, index) {
+            return DetailsCardView(data: homeViewModel.data.value[index]);
+          },
+          itemCount: homeViewModel.data.value.length,
         ),
-        itemBuilder: (context, index) {
-          return DetailsCardView(data: RecipeData.data[index]);
-        },
-        itemCount: RecipeData.data.length,
       ),
     );
   }
@@ -88,13 +161,16 @@ class TypeTwoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ListCardView(data: RecipeData.data[index]);
-      },
-      itemExtent: 100,
-      itemCount: RecipeData.data.length,
-      padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
+    final homeViewModel = Get.find<HomeViewModel>();
+    return Obx(
+      () => ListView.builder(
+        itemBuilder: (context, index) {
+          return ListCardView(data: homeViewModel.data.value[index]);
+        },
+        itemExtent: 100,
+        itemCount: homeViewModel.data.value.length,
+        padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
+      ),
     );
   }
 }
@@ -104,20 +180,23 @@ class TypeThreeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
-      // padding: const EdgeInsets.all(0),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          mainAxisExtent: 230,
+    final homeViewModel = Get.find<HomeViewModel>();
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.fromLTRB(22, 8, 22, 0),
+        // padding: const EdgeInsets.all(0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            mainAxisExtent: 230,
+          ),
+          itemBuilder: (context, index) {
+            return FullCardView(data: homeViewModel.data.value[index]);
+          },
+          itemCount: homeViewModel.data.value.length,
         ),
-        itemBuilder: (context, index) {
-          return FullCardView(data: RecipeData.data[index]);
-        },
-        itemCount: RecipeData.data.length,
       ),
     );
   }

@@ -51,4 +51,5 @@ class RecipeData {
       category: FoodCategory.desserts,
     ),
   ].obs;
+  static var filteredData = data.obs;
 }

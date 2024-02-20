@@ -48,6 +48,35 @@ class EmptyFavView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "./assets/folder.png",
+            height: 200,
+            width: 180,
+            fit: BoxFit.contain,
+          ),
+          const Text(
+            "No Favorites Yet",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: Text(
+              "You can add favorites by clicking favorite button on recipe item",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black54,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -43,6 +43,7 @@ class ListCardView extends StatelessWidget {
                     Expanded(
                       child: SizedBox(
                         width: double.infinity,
+                        height: 50,
                         child: Text(
                           data.name,
                           maxLines: 2,
