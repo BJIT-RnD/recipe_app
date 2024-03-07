@@ -1,25 +1,10 @@
 import 'package:get/get.dart';
+import 'package:recipes/model/recipe.dart';
 
 enum FoodCategory { breakfast, lunch, drinks, pastas, salads, desserts, soups }
 
-class Recipe {
-  String name;
-  int calories;
-  int makingTime;
-  FoodCategory category;
-  bool isFav = false;
-
-  Recipe({
-    required this.name,
-    required this.calories,
-    required this.makingTime,
-    required this.category,
-    bool isFav = false,
-  });
-}
-
-class RecipeData {
-  static List<Recipe> data = [
+class DummyData {
+  static List<Recipe> dummyData = [
     Recipe(
       name: "Bucatini with mushrooms & sausage",
       calories: 794,
@@ -50,6 +35,10 @@ class RecipeData {
       makingTime: 20,
       category: FoodCategory.desserts,
     ),
-  ].obs;
+  ];
+}
+
+class RecipeData {
+  static List<Recipe> data = [];
   static var filteredData = data.obs;
 }

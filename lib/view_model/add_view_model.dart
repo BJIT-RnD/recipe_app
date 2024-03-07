@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:recipes/model/dummy_data.dart';
-import 'package:recipes/view_model/home_view_model.dart';
+import 'package:recipes/model/recipe.dart';
 
 class AddViewModel extends GetxController {
   var nameController = TextEditingController();
@@ -24,7 +25,7 @@ class AddViewModel extends GetxController {
   void setMakingTime(val) => makingTime(val);
   void setCategory(val) => category(val);
 
-  void onSubmit() {
+  void onSubmit() async {
     var cal = 0;
     var mTime = 0;
     if (name.value != "" && calories.value != "" && makingTime.value != "") {
@@ -32,16 +33,24 @@ class AddViewModel extends GetxController {
         cal = int.parse(calories.value);
         try {
           mTime = int.parse(makingTime.value);
-          RecipeData.data.add(
-            Recipe(
-                name: name.value,
-                calories: cal,
-                makingTime: mTime,
-                category: category.value),
+          debugPrint("wow");
+          var box = Hive.box("recipe");
+          debugPrint("wow2");
+          Recipe recipeData = Recipe(
+            name: name.value,
+            calories: cal,
+            makingTime: mTime,
+            category: category.value,
           );
-          // RecipeData.filteredData.value = RecipeData.data;
-          // var hvm = Get.find<HomeViewModel>();
-          // hvm.searchController.clear;
+          RecipeData.data.add(recipeData);
+          List<dynamic> serializedRecipe =
+              RecipeData.data.map((e) => e.toJson()).toList();
+          box.put("recipes", serializedRecipe);
+          // debugPrint("typeof --> ${recipeData.runtimeType}");
+          // recipes.addAll([recipeData]);
+          // // box.delete("recipes");
+          // box.put("recipes", recipes);
+          // debugPrint("recipes-length: ${recipes.length}");
           error({
             "title": "Success",
             "message": "Your data added successfully",

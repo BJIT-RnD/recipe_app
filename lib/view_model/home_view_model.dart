@@ -17,7 +17,7 @@ class HomeViewModel extends GetxController {
     const TypeThreeView(),
   ].obs;
 
-  void setData(recipeData) {
-    data(recipeData);
-  }
+  // void setData(recipeData) {
+  //   data(recipeData);
+  // }
 }

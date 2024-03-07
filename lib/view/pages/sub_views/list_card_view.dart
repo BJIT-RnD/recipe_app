@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:recipes/model/dummy_data.dart';
+import 'package:recipes/model/recipe.dart';
 import 'package:recipes/view_model/favorite_view_model.dart';
 
 class ListCardView extends StatelessWidget {
